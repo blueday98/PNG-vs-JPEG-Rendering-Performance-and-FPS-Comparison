@@ -134,6 +134,25 @@
 
 </details>
 
+<details>
+<summary><b>🔬 [상세 4] Phase 1: 29장 균등 샘플링 예비 검증 요약 (0.3 vs 0.4 비교)</b></summary>
+
+<br>
+
+255장 전수 검증에 앞서, 9프레임 간격(1, 10, 19, ..., 253번)으로 29장을 표본 추출하여 진행한 초기 예비 실험 결과입니다.
+
+- **관측 속도 개선**: OpenCV PNG (17.7초) ➔ OpenCV JPEG q95 (3.07초)로 **약 82.6% 경과 시간 단축 확인**
+- **18장 제외 원인 규명**: 
+  - 미검출(11장) 및 가장자리 경계 조건(7장)으로 인해 11장만 저장되었으며, **PNG와 JPEG 모두 완전히 동일한 18장을 제외하고 동일한 11장을 보존함**을 확인.
+- **예비 검증 산출물 위치**: [📂 ](preliminary_29frames/)
+  - [](preliminary_29frames/results_det_score_0.3): 검출 점수 0.3 기준 11장 비교, 필터 추적 컨택트 시트(), 감사 JSON 수록
+  - [](preliminary_29frames/results_det_score_0.4): 검출 점수 0.4 기준 10장 비교, 프레임 235번 비교 이미지 수록
+  - [](preliminary_29frames/audit_preliminary_29frames.py): 29장 예비 감사 재현 코드
+
+</details>
+
+
+
 ---
 
 ## 🏁 5. 최종 결론 및 프로덕션 배포 가이드라인
@@ -173,6 +192,11 @@ python scripts/plot_test7_keypoint_error_scatter.py
 ```
 ├── README.md                                      # 본 종합 검증 보고서
 ├── .gitignore                                     # Git 무시 규칙
+├── preliminary_29frames/                          # [Phase 1] 29장 균등 추출 예비 검증 실험
+│   ├── README.md                                  # 예비 검증 실험 상세 기록 문서
+│   ├── audit_preliminary_29frames.py              # 예비 감사 실행 스크립트
+│   ├── results_det_score_0.3/                     # 임계값 0.3 표본 결과 및 컨택트 시트
+│   └── results_det_score_0.4/                     # 임계값 0.4 표본 결과
 ├── assets/
 │   └── images/                                    # 고해상도 시각화 차트 및 플롯
 │       ├── keypoint_error_plot.png                # [산점도] 2,886개 관절 전수 분포
